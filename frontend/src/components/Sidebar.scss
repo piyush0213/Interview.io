@@ -1,0 +1,62 @@
+/* Sidebar */
+.sidebar {
+    background-color: #fff;
+    padding: 30px 20px;
+    border-right: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all 0.2s;
+    
+  }
+  .toggle-btn {
+    position: absolute;
+    top: 5%;
+    right: -20px; // Align the toggle button outside the sidebar
+    background-color: #ff5722;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .logo {
+    color: #f1720a;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 40px;
+  }
+
+
+  .menu ul {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .menu li {
+    font-size: 16px;
+    color: #333;
+    margin: 20px 0;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s, transform 0.3s; /* Transition effect */
+  }
+  
+  .menu li i {
+    margin-right: 15px;
+    font-size: 18px;
+  }
+  
+  .overview-icon ,
+  .interviews-icon,
+  .video-icon,
+  .profile-icon,
+  .logout-icon {
+    color: #f1720a; /* Color for all icons: Interviews, Video Calling, Profile, Log out */
+  }
+  
+  .menu li:hover {
+    color: #f1720a;
+    transform: scale(1.05); /* Slightly scale up on hover */
+    cursor: pointer;
+  }

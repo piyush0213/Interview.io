@@ -1,0 +1,23 @@
+{
+  "name": "node-polyfill",
+  "version": "1.0.0",
+  "description": "Browser polyfill for node.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhangchiqing/node-polyfill.git"
+  },
+  "keywords": [
+    "Browser",
+    "polyfill"
+  ],
+  "author": "Leo Zhang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhangchiqing/node-polyfill/issues"
+  },
+  "homepage": "https://github.com/zhangchiqing/node-polyfill#readme"
+}
