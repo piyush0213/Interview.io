@@ -5,7 +5,6 @@ The project **"AI-Powered Real-Time Interview Coach"** is an innovative virtual 
 ## 🌟 Features
 
 - 💻 **Simulated Interview Environment** : The platform provides a **real-time** or **peer-to-peer** interview experience, allowing users to practice in a lifelike scenario using their webcam and microphone. This helps users develop time management skills and offers a flexible and convenient.
-  
 - 🤔 **Quiz Section:** The quiz system generates **dynamic questions** based on the user's inputs, **covering any domain**. The adaptive difficulty feature adjusts the complexity of questions in real-time, making it suitable for users at different experience levels.
 
 - ❓ **AI-Based Q&A Section**: In this section, users receive **AI-Based real-time, context-specific interview questions** based on their skill level. The AI adjusts the difficulty based on the quality of the user’s responses, ensuring a personalized learning experience.
@@ -48,13 +47,14 @@ The project **"AI-Powered Real-Time Interview Coach"** is an innovative virtual 
    ```
 
 3. Set up environment variables:
-   Create a `.env` file in the **frontend directory** and add **your required environment variables** according to this format: 
+   Create a `.env` file in the **frontend directory** and add **your required environment variables** according to this format:
 
    ```bash
     VITE_API_URL='<your-backend-api-url'
    ```
-    Format also present in the frontend folder in the file [.env.example.frontend](./frontend/.env.example.frontend)
-    <br>
+
+   Format also present in the frontend folder in the file [.env.example.frontend](./frontend/.env.example.frontend)
+   <br>
 
 4. Start the development frontend server:
    ```bash
@@ -76,26 +76,52 @@ The project **"AI-Powered Real-Time Interview Coach"** is an innovative virtual 
    ```
 
 3. Set up environment variables:
-   Create a `.env` file in the **backend directory** and add **your required environment variables** according to this format: 
+   Create a `.env` file in the **backend directory** and add **your required environment variables** according to this format:
 
    ```bash
    JWT_SECRET=<your-preferred-jwt-secret-key>
    MONGODB_URI=<your-mongodb-connection-string>
    MONGODB_URI1=<optional>
    GEMINI_API_KEY=<your-gemini-api-key>
-   CLOUDINARY_API_KEY= 
+   CLOUDINARY_API_KEY=
    CLOUDINARY_API_SECRET=
    CLOUDINARY_NAME=
    NODE_ENV=development
-   PORT=3000 
+   PORT=3000
    ```
-    Format also present in the backend folder in the file [.env.example.backend](./backend/.env.example.backend)
-    <br>
+
+   Format also present in the backend folder in the file [.env.example.backend](./backend/.env.example.backend)
+   <br>
 
 4. Start the server:
    ```bash
    npm run dev
    ```
+
+### Running Frontend + Backend Together
+
+To run both frontend and backend simultaneously:
+
+1. Make sure you have installed dependencies for both:
+
+   ```bash
+   npm run install-all
+
+   ```
+
+2. Start both servers together:  
+   npm run dev
+
+3. Access the app:
+   Backend → http://localhost:3000
+
+   Frontend → http://localhost:5173
+
+⚡ Extra Notes:
+
+npm run install-all → Installs dependencies for both frontend and backend in one go.
+
+npm run dev → Starts both frontend and backend together using concurrently.
 
 ## 🌐 API Endpoints
 
@@ -115,11 +141,12 @@ The project **"AI-Powered Real-Time Interview Coach"** is an innovative virtual 
 - `POST /api/v1/quiz/terminate-quiz`: Terminate a quiz session
 - `POST /api/v1/questions/generate-questions`: Generate questions for a quiz
 - `POST /api/v1/questions/chat`: Interact with AI chatbot
-  
+
 ## 😎 Members of our Team Diamond 👥
+
 - **Piyush Prajapati** - [@piyush0213](https://github.com/piyush0213)
 - **Lakshya Chauhan** - [@lakshya-8000cr](https://github.com/lakshya-8000cr)
-- **Parth Sharma**  - [@parth-476](https://github.com/parth-476)
+- **Parth Sharma** - [@parth-476](https://github.com/parth-476)
 - **Jashan Kumar** - [@Jk-6900cr](https://github.com/Jk-6900cr)
 
 ## 🤝 Contributing
