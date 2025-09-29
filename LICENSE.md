@@ -1,6 +1,6 @@
-                            MIT License
+                                 Apache License
 
-  **Copyright (c) 2025 Piyush**
+   **Copyright (c) 2025 Piyush**
                                  
                                  Apache License
                            Version 2.0, January 2004
