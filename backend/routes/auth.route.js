@@ -2,7 +2,7 @@
 // import { signup, login, logout, getAuth } from "../controllers/auth.controller.js";
 // import { checkUserAuth } from "../middleware/checkUserAuth.js";
 const express = require("express");
-const { signup, login, logout, getAuth, editUser, updateAvatar, saveProfileData, getProfileData } = require("../controllers/auth.controller.js");
+const { googleLogin, signup, login, logout, getAuth, editUser, updateAvatar, saveProfileData, getProfileData } = require("../controllers/auth.controller.js");
 const checkUserAuth = require("../middleware/checkUserAuth.js");
 const checkFileType = require("../middleware/checkFileType.js");
 const uploadFile = require("../middleware/uploadFile.js");
@@ -18,7 +18,7 @@ router.post("/updateAvatar", checkUserAuth, uploadFile, checkFileType, updateAva
 router.post('/saveProfileData', checkUserAuth, saveProfileData);
 router.get('/getProfileData', checkUserAuth, getProfileData);
 router.post('/uploadResume', checkUserAuth, uploadResume, uploadResume);
-
+router.post("/google", googleLogin);
 router.get("/getAuth", checkUserAuth, getAuth);
 
 module.exports = router;
