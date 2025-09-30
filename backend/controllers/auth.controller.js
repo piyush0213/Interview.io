@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const axios = require("axios");
 const bcrypt = require("bcryptjs");
 const { genTokenAndSendCookie } = require("../config/generateToken");
 const  connectToMongo  = require("../connectDb.js");
@@ -9,6 +10,114 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
+async function googleLogin(req, res) {
+  try {
+    const { access_token, isRegistering, role } = req.body;
+
+    if (!access_token) {
+      return res.status(400).json({
+        success: false,
+        message: "Access token is required",
+      });
+    }
+
+    // 🔹 Get user info from Google using access_token
+    const { data: googleUser } = await axios.get(
+      "https://www.googleapis.com/oauth2/v3/userinfo",
+      {
+        headers: { Authorization: `Bearer ${access_token}` },
+      }
+    );
+
+    const { sub: googleId, email, name } = googleUser;
+
+    if (!email || !googleId || !name) {
+      return res.status(400).json({
+        success: false,
+        message: "Incomplete Google user data",
+        googleUser,
+      });
+    }
+
+    // 🔹 Find user by email (first priority)
+    let user = await User.findOne({ email });
+    let isNewUser = false;
+
+    if (user) {
+      if (isRegistering) {
+        return res.status(400).json({
+          success: false,
+          message: "User already exists with this email. Please login instead.",
+        });
+      }
+      // Case 1: User exists with local password → reject Google login
+      if (user.provider === "local" && user.password) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "This account was created with email & password. Please login using email/password.",
+        });
+      }
+
+      // Case 2: User exists but has no googleId yet → update it
+      if (!user.googleId) {
+        user.googleId = googleId;
+        user.provider = "google";
+        await user.save();
+      }
+    } else {
+      // Case 3: User not found → must be registering
+      if (!isRegistering) {
+        return res.status(404).json({
+          success: false,
+          message: "User not found. Please sign up first.",
+        });
+      }
+
+      if (!role) {
+        return res.status(400).json({
+          success: false,
+          message: "Role is required when registering",
+        });
+      }
+
+      // 🔹 Create new user
+      user = new User({
+        name,
+        email,
+        googleId,
+        provider: "google",
+        role,
+      });
+
+      await user.save();
+      isNewUser = true;
+    }
+
+    // 🔹 Generate token + send cookie
+    const authToken = genTokenAndSendCookie(user._id, res);
+
+    return res.status(200).json({
+      success: true,
+      user: {
+        ...user._doc, // spread operator to get all the properties of the user
+        // password: "", // Dont show password
+      },
+      token: authToken,
+      message: isNewUser
+        ? "Google signup successful"
+        : "Google login successful",
+    });
+  } catch (error) {
+    console.error("Google login error:", error.message);
+    return res.status(500).json({
+      success: false,
+      message: "Google login failed",
+      error: error.message,
+    });
+  }
+}
 
 const saveProfileData = async (req, res) => {
   try {
@@ -160,7 +269,7 @@ async function signup(req, res) {
     });
   } catch (error) {
     // console.log(error.message);
-    res.status(501).json({ success: false, message: "Server Error" });
+    res.status(501).json({ success: false, message: "Google login failed" });
   }
 }
 
@@ -183,6 +292,13 @@ async function login(req, res) {
           success: false,
           message: "User doesnt not exist with that email",
         });
+    }
+    if (user.provider === "google") {
+      return res.status(400).json({
+        success: false,
+        message:
+          "This account is registered with Google. Please login using Google.",
+      });
     }
 
     const pass = await bcrypt.compare(password, user.password); // compare password
@@ -234,4 +350,4 @@ async function getAuth(req, res) {
   }
 }
 
-module.exports = { signup, login, logout, getAuth, editUser, updateAvatar, saveProfileData, getProfileData };
+module.exports = { googleLogin, signup, login, logout, getAuth, editUser, updateAvatar, saveProfileData, getProfileData };

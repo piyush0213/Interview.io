@@ -5,7 +5,6 @@ const userSchema = Schema({
     name: {
         type: String,
         required: true,
-        unique: true,
     },
     email: {
         type: String,
@@ -14,7 +13,22 @@ const userSchema = Schema({
     },
     password: {
         type: String,
-        required: true,
+        required: function () {
+            return this.provider === "local";
+        },
+    },
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true,
+      required: function () {
+        return this.provider === "google";
+      },
+    },
+    provider: {
+      type: String,
+      enum: ["local", "google"],
+      default: "local",
     },
     avatar: {
         type: String,
