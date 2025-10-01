@@ -113,16 +113,30 @@ We aim to keep things smooth and transparent:
 
    `npm i`
 
-3. Set up environment variables:
+3. Google OAuth Client ID Setup
+   - Go to Google Cloud Console.
+   - Navigate to **APIs & Services → Credentials**.
+   - Click **Create Credentials → OAuth Client ID**.
+   - **Application type:** Web Application
+   -  **Authorized JavaScript origins:**
+      - http://localhost:5173 (for local development)
+      - Any other frontend URI you use
+   - **Redirect URIs:** Not needed for this setup
+   - Click **Create** and copy the **Client ID**.
+
+4. Set up environment variables:
 
    Create a `.env` file in the **frontend directory** and add **your required environment variables** according to this format:
 
-   `VITE_API_URL='<your-backend-api-url'`
+   ```env
+      VITE_API_URL='<your-backend-api-url>'
+      VITE_GOOGLE_CLIENT_ID='<your-google-oauth-client-id>'
+   ```
 
    Format also present in the frontend folder in the file [.env.example.frontend](./frontend/.env.example.frontend)
    <br>
 
-4. Start the development frontend server:
+5. Start the development frontend server:
 
    `npm run dev`
 

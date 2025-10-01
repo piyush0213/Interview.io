@@ -29,6 +29,32 @@ export const useStore = create((set) => ({
       set({ isSigningUp: false, user: null }); // set isSigningUp back to false
     }
   },
+  googleSignup: async (access_token, role) => {
+    if (!access_token || !role) return;
+
+    set({ isSigningUp: true });
+    try {
+      const res = await axios.post(`${API_URL}/api/v1/auth/google`, {
+        access_token,
+        isRegistering: true,
+        role,
+      });
+
+      if (res.data.success) {
+        localStorage.setItem("jwt-interview-coach", res.data.token);
+        set({ user: res.data.user, isSigningUp: false });
+        toast.success(res.data.message || "Google login/signup successful!");
+      } else {
+        toast.error(res.data.message || "Google login/signup failed");
+        set({ isSigningUp: false });
+      }
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Google login/signup failed"
+      );
+      set({ isSigningUp: false });
+    }
+  },
   login: async (credentials) => {
     set({ isLoggingIn: true });
     try {
@@ -43,6 +69,34 @@ export const useStore = create((set) => ({
       toast.error(error.response.data.message || "Error in logging in");
       set({ user: null, isLoggingIn: false });
       return null;
+    }
+  },
+  googleLogin: async (access_token) => {
+    if (!access_token) return false;
+
+    set({ isLoggingIn: true });
+    try {
+      const res = await axios.post(`${API_URL}/api/v1/auth/google`, {
+        access_token,
+        isRegistering: false, // login mode
+      });
+
+      if (res.data.success) {
+        localStorage.setItem("jwt-interview-coach", res.data.token);
+        set({ user: res.data.user, isLoggingIn: false });
+        toast.success(res.data.message || "Google login successful!");
+        return true;
+      } else {
+        toast.error(res.data.message || "Google login failed");
+        set({ isLoggingIn: false });
+        return false;
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Google login failed");
+      set({ isLoggingIn: false });
+      return false;
+    } finally {
+      set({ isLoggingIn: false });
     }
   },
   updateAvatar: async (avatar) => {

@@ -45,18 +45,30 @@ The project **"AI-Powered Real-Time Interview Coach"** is an innovative virtual 
    ```bash
    npm i
    ```
+3. Google OAuth Client ID Setup
+   - Go to Google Cloud Console.
+   - Navigate to **APIs & Services → Credentials**.
+   - Click **Create Credentials → OAuth Client ID**.
+   - **Application type:** Web Application
+   -  **Authorized JavaScript origins:**
+      - http://localhost:5173 (for local development)
+      - Any other frontend URI you use
+   - **Redirect URIs:** Not needed for this setup
+   - Click **Create** and copy the **Client ID**.
 
-3. Set up environment variables:
+4. Set up environment variables:
+
    Create a `.env` file in the **frontend directory** and add **your required environment variables** according to this format:
 
-   ```bash
-    VITE_API_URL='<your-backend-api-url'
+   ```env
+      VITE_API_URL='<your-backend-api-url>'
+      VITE_GOOGLE_CLIENT_ID='<your-google-oauth-client-id>'
    ```
 
    Format also present in the frontend folder in the file [.env.example.frontend](./frontend/.env.example.frontend)
    <br>
 
-4. Start the development frontend server:
+5. Start the development frontend server:
    ```bash
    npm run dev
    ```
@@ -129,6 +141,7 @@ npm run dev → Starts both frontend and backend together using concurrently.
 - `POST /api/v1/auth/login`: User login
 - `POST /api/v1/auth/logout`: User logout
 - `POST /api/v1/auth/editUser`: Edit user information
+- `POST /api/v1/auth/google`: Google Login and Signup
 - `GET /api/v1/auth/getAuth`: Get user authentication status
 - `POST /api/v1/auth/updateAvatar`: Update user avatar
 - `POST /api/v1/rooms/addroom/:roomID`: Add a new room
