@@ -161,6 +161,14 @@ npm run dev → Starts both frontend and backend together using concurrently.
 - **Lakshya Chauhan** - [@lakshya-8000cr](https://github.com/lakshya-8000cr)
 - **Parth Sharma** - [@parth-476](https://github.com/parth-476)
 - **Jashan Kumar** - [@Jk-6900cr](https://github.com/Jk-6900cr)
+ 
+## 🌟 Contributors
+
+We appreciate all the contributors who have helped make Interview.io better! 🎉
+
+<a href="https://github.com/piyush0213/Interview.io/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=piyush0213/Interview.io" alt="Contributors" />
+</a>
 
 ## 🤝 Contributing
 
