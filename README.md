@@ -223,6 +223,17 @@ Before contributing, please:
 - Write clear commit messages
 - Test your changes thoroughly
 
+## Contributor
+
+A heartfelt thank you to all the contributors who have dedicated their time and effort to make this project a success.  
+Your contributions—whether it’s code, design, testing, or documentation—are truly appreciated! 🚀
+
+#### Thanks to all the wonderful contributors 💖
+
+<a href="https://github.com/piyush0213/Interview.io/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=piyush0213/Interview.io" />
+</a>
+
 ## 🙏 Acknowledgements
 
 - [Gemini](https://gemini.google.com/) for providing the AI API
